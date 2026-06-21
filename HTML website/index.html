@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unsworth Group PPG</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <style>
+    :root {
+      --primary: #005eb8;
+      --secondary: #007f3b;
+      --accent: #f4f7fb;
+      --text: #222;
+      --muted: #666;
+      --max-width: 1100px;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: #ffffff;
+      line-height: 1.6;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      border-bottom: 1px solid #e0e0e0;
+      background: #ffffff;
+    }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0.75rem;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    nav a {
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: #f4f7fb;
+      border: 1px solid #d9e2f3;
+      display: inline-block;
+    }
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+    .hero {
+      padding: 2rem 1.25rem;
+      background: #f9fbff;
+      border-radius: 18px;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .hero h1 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--primary);
+    }
+    .hero p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .card {
+      background: var(--accent);
+      border-radius: 14px;
+      padding: 1.25rem;
+      border: 1px solid #dde4f0;
+      min-height: 160px;
+    }
+    .card h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+    .card p {
+      margin: 0 0 1rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .card a {
+      font-weight: 700;
+    }
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="brand-title">Unsworth Group PPG</div>
+      <nav>
+        <ul>
+          <li><a href="unsworth-ppg-homepage.html">Home</a></li>
+          <li><a href="join-the-ppg.html">Join PPG</a></li>
+          <li><a href="form.html">Forms</a></li>
+          <li><a href="upcoming-events.html">Events</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Welcome to Unsworth Group PPG</h1>
+      <p>This is your new landing page. Use the links below to open the pages already in your site and make `index.html` the main public homepage.</p>
+    </section>
+    <section class="section">
+      <h2>Quick links</h2>
+      <div class="grid">
+        <article class="card">
+          <h2>Homepage</h2>
+          <p>Open your current homepage content.</p>
+          <a href="unsworth-ppg-homepage.html">View homepage</a>
+        </article>
+        <article class="card">
+          <h2>Sign up</h2>
+          <p>Send visitors to the Join the PPG page.</p>
+          <a href="join-the-ppg.html">Join the PPG</a>
+        </article>
+        <article class="card">
+          <h2>Contact form</h2>
+          <p>Let visitors submit information from your website.</p>
+          <a href="form.html">Open form</a>
+        </article>
+        <article class="card">
+          <h2>Events</h2>
+          <p>Show upcoming events.</p>
+          <a href="upcoming-events.html">View events</a>
+        </article>
+      </div>
+    </section>
+    <section class="section">
+      <h2>More pages</h2>
+      <div class="grid">
+        <article class="card">
+          <h2>Information</h2>
+          <p>Share details and resources with visitors.</p>
+          <a href="information-page.html">Information page</a>
+        </article>
+        <article class="card">
+          <h2>Calendar</h2>
+          <p>Link to your calendar page.</p>
+          <a href="calendar.html">Calendar</a>
+        </article>
+        <article class="card">
+          <h2>Help us help you</h2>
+          <p>Support page for community feedback.</p>
+          <a href="help-us-help-you.html">Help us help you</a>
+        </article>
+        <article class="card">
+          <h2>Banner</h2>
+          <p>Show the banner page for site announcements.</p>
+          <a href="banner.html">Banner</a>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    Made for your HTML website — place `index.html` in your site root and it will become the public entry page.
+  </footer>
+</body>
+</html>

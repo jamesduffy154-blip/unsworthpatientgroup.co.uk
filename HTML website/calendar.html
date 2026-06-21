@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calendar | Unsworth Group PPG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <style>
+    :root {
+      --primary: #005eb8;
+      --secondary: #007f3b;
+      --accent: #f4f7fb;
+      --text: #222;
+      --muted: #666;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      border-bottom: 1px solid #e0e0e0;
+      background: #ffffff;
+    }
+
+    .top-bar {
+      font-size: 0.8rem;
+      padding: 0.35rem 1rem;
+      background: #f5f5f5;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      font-size: 0.95rem;
+    }
+
+    nav li {
+      position: relative;
+    }
+
+    .nav-more {
+      font-weight: 600;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2rem;
+      margin: 0 0 0.75rem;
+      color: var(--primary);
+    }
+
+    .hero-text p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .section p {
+      margin: 0 0 0.75rem;
+      color: var(--text);
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .filter-btn:hover {
+      background-color: #00488c;
+    }
+
+    .filter-btn.active {
+      background-color: var(--secondary);
+    }
+
+    .westhoughton-submenu {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .westhoughton-submenu .filter-btn {
+      margin-left: 0;
+    }
+
+    .calendar-container {
+      display: none;
+    }
+
+    .calendar-container.active {
+      display: block;
+    }
+
+    footer {
+      border-top: 1px solid #e0e0e0;
+      padding: 1.25rem 1rem 2rem;
+      background: #fafafa;
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .top-bar {
+        text-align: left;
+      }
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .search-box input {
+      padding: 0.3rem 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .search-box button {
+      padding: 0.3rem 0.7rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .search-box button:hover {
+      background: #00488c;
+    }
+
+    .highlight {
+      background-color: #ffeb3b;
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <button onclick="searchAndHighlight()">Search</button>
+        <button onclick="clearSearch()" style="background: #999;">Clear</button>
+      </div>
+    </div>
+    <div class="nav-container">
+      <div class="brand">
+<a href="unsworth-ppg-homepage.html">
+  <img src="https://static.wixstatic.com/media/570e54_77ca91a562bf4a7080547e5c28afd8e2~mv2.jpg" alt="Unsworth Group PPG logo" />
+</a>        <div class="brand-title">Unsworth Group PPG</div>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="unsworth-ppg-homepage.html">Home  </a></li>
+          <li><a href="information-page.html">Information  </a></li>
+          <li><a href="join-the-ppg.html">Join the PPG  </a></li>
+          <li><a href="tell-us-about-your-event.html">Tell us about your event  </a></li>
+          <li><a href="help-us-help-you.html">Help us help you  </a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Calendar</h1>
+        <p>
+          View upcoming events and activities organized by the Unsworth Patient Participation Group and the local community.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Upcoming Events</h2>
+      <p>
+        Stay informed about important meetings, health awareness events, and community activities. Click on any event to learn more details.
+      </p>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-calendar="Bolton">Bolton Calendar</button>
+        <button class="filter-btn" data-calendar="Blackrod">Blackrod Calendar</button>
+        <button class="filter-btn westhoughton-main">Westhoughton</button>
+        <div class="westhoughton-submenu">
+          <button class="filter-btn" data-calendar="John Holt">John Holt</button>
+          <button class="filter-btn" data-calendar="Westhoughton hub">Westhoughton Hub</button>
+        </div>
+
+      </div>
+      <div class="calendar-container active" id="Bolton-calendar">
+        <iframe data-src="https://calendar.google.com/calendar/embed?src=unsworthppgwebsite%40gmail.com&ctz=Europe%2FLondon" loading="lazy" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+      <div class="calendar-container" id="Blackrod-calendar">
+        <iframe data-src="https://calendar.google.com/calendar/embed?src=ed4e9dea0e9e876be375349d029cf441487ebc710b7b25fbaf0253eb67ad4f4f%40group.calendar.google.com&ctz=Europe%2FLondon" loading="lazy" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+      <div class="calendar-container" id="Westhoughton hub-calendar">
+        <iframe data-src="https://calendar.google.com/calendar/embed?src=49d4f05e75c6ef7bce752ead334e745c694213a458f5b63e4576dd4f2a812797%40group.calendar.google.com&ctz=Europe%2FLondon" loading="lazy" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+      <div class="calendar-container" id="John Holt-calendar">
+        <iframe data-src="https://calendar.google.com/calendar/embed?src=cde1de18496f766be4270983a47229a6c5b3ec74be2bed64023296520711549f%40group.calendar.google.com&ctz=Europe%2FLondon" loading="lazy" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        Copyright &copy; 2025 Unsworth Patient Participation. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy Notice</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Search and highlight functionality
+    function searchAndHighlight() {
+      const searchTerm = document.getElementById('searchInput').value.trim();
+      
+      if (!searchTerm) {
+        alert('Please enter a search term');
+        return;
+      }
+
+      // First clear any previous highlights
+      clearSearch();
+
+      // Search through main content
+      const mainContent = document.querySelector('main');
+      const regex = new RegExp(`(${searchTerm})`, 'gi');
+      let matchCount = 0;
+
+      // Get all text nodes and highlight matches
+      function highlightInNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (regex.test(node.textContent)) {
+            const span = document.createElement('span');
+            span.innerHTML = node.textContent.replace(regex, '<span class="highlight">$1</span>');
+            node.parentNode.replaceChild(span, node);
+            matchCount += (node.textContent.match(regex) || []).length;
+          }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          node.childNodes.forEach(child => highlightInNode(child));
+        }
+      }
+
+      highlightInNode(mainContent);
+      
+      if (matchCount > 0) {
+        alert(`Found ${matchCount} match(es) for "${searchTerm}"`);
+        // Scroll to first highlight
+        const firstHighlight = document.querySelector('.highlight');
+        if (firstHighlight) {
+          firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } else {
+        alert(`No matches found for "${searchTerm}"`);
+      }
+    }
+
+    function clearSearch() {
+      // Remove all highlights
+      document.querySelectorAll('.highlight').forEach(el => {
+        const parent = el.parentNode;
+        while (el.firstChild) {
+          parent.insertBefore(el.firstChild, el);
+        }
+        parent.removeChild(el);
+        parent.normalize();
+      });
+      
+      document.getElementById('searchInput').value = '';
+    }
+
+    // Allow Enter key to search
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchAndHighlight();
+      }
+    });
+
+    function loadCalendarFrame(container) {
+      const iframe = container.querySelector('iframe');
+      if (!iframe || iframe.dataset.loaded === 'true') return;
+      iframe.src = iframe.dataset.src;
+      iframe.dataset.loaded = 'true';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const buttons = document.querySelectorAll('.filter-btn');
+      const calendars = document.querySelectorAll('.calendar-container');
+      const westhoughtonMain = document.querySelector('.westhoughton-main');
+      const westhoughtonSubmenu = document.querySelector('.westhoughton-submenu');
+
+      function showCalendar(calendarId) {
+        buttons.forEach(btn => btn.classList.remove('active'));
+        calendars.forEach(cal => cal.classList.remove('active'));
+
+        const selectedButton = document.querySelector(`.filter-btn[data-calendar="${calendarId}"]`);
+        if (selectedButton) selectedButton.classList.add('active');
+
+        const selectedCalendar = document.getElementById(calendarId + '-calendar');
+        if (selectedCalendar) {
+          selectedCalendar.classList.add('active');
+          loadCalendarFrame(selectedCalendar);
+        }
+      }
+
+      westhoughtonMain.addEventListener('click', function(e) {
+        e.preventDefault();
+        westhoughtonSubmenu.style.display = westhoughtonSubmenu.style.display === 'flex' ? 'none' : 'flex';
+      });
+
+      buttons.forEach(button => {
+        if (!button.classList.contains('westhoughton-main')) {
+          button.addEventListener('click', function() {
+            const calendarId = this.getAttribute('data-calendar');
+            showCalendar(calendarId);
+          });
+        }
+      });
+
+      const defaultCalendar = document.querySelector('.filter-btn.active');
+      if (defaultCalendar) {
+        showCalendar(defaultCalendar.getAttribute('data-calendar'));
+      }
+    });
+  </script>
+</body>
+</html>

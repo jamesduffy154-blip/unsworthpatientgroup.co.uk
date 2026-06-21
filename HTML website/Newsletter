@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Newsletter | Unsworth Patient Participation Group</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      line-height: 1.6;
+      background-color: #f7f7f7;
+      color: #222;
+    }
+    header, nav, footer, main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    header {
+      padding: 1rem 1rem 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img.logo {
+      height: 70px;
+    }
+    nav {
+      margin: 0.5rem auto 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #ccc;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    nav li {
+      margin: 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: #005b8f;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    main {
+      background: #fff;
+      padding: 1.5rem 1rem 2rem;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    h1, h2, h3, h4 {
+      color: #003b5c;
+    }
+    .newsletter-image {
+      max-width: 400px;
+      margin: 1rem 0;
+    }
+    .newsletter-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    a {
+      color: #005b8f;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      font-size: 0.9rem;
+      color: #555;
+      padding: 1rem;
+      border-top: 1px solid #ccc;
+      margin-bottom: 2rem;
+    }
+    footer a {
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top of page -->
+  <a id="top"></a>
+
+  <header>
+    <div>
+      <h1>Unsworth Patient Participation Group</h1>
+      <p>Welcome to the Unsworth Patient Participation Group website</p>
+    </div>
+    <a href="https://jamesduffy154.wixsite.com/unsworthgroupppg">
+      <img
+        src="https://static.wixstatic.com/media/570e54_77ca91a562bf4a7080547e5c28afd8e2~mv2.jpg/v1/fill/w_97,h_94,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/PPG%20logo_edited.jpg"
+        alt="Unsworth PPG logo"
+        class="logo"
+      />
+    </a>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg">HOME</a></li>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/information">Information</a></li>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/newsletter-and-upcoming-events">Newsletter and upcoming events</a></li>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/newsletter">Newsletter</a></li>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/upcoming-events">Upcoming events</a></li>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/join-the-ppg">Join the PPG</a></li>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/tell-us-about-your-event">Tell us about your event</a></li>
+      <li><a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/help-us-help-you">Help us Help you</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <img
+      src="https://static.wixstatic.com/media/3b1f25_efc1908db3fa487d88c92f3e48ce0350.jpg/v1/fill/w_1280,h_720,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3b1f25_efc1908db3fa487d88c92f3e48ce0350.jpg"
+      alt="Unsworth PPG header image"
+    />
+  </div>
+
+  <main>
+    <h2>PPG Newsletter</h2>
+
+    <div class="newsletter-image">
+      <img
+        src="https://static.wixstatic.com/media/nsplsh_15d6e0246c38452b837a2cdd6853d759~mv2.jpg/v1/fill/w_838,h_792,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Jon%20Tyson.jpg"
+        alt="Image by Jon Tyson"
+      />
+    </div>
+
+    <h4>The Unsworth PPG latest newsletter</h4>
+
+    <p>
+      The Patient Participation Group (PPG) newsletter is produced as a special edition publication
+      designed to highlight the important work and initiatives taking place both locally and nationally
+      within healthcare. Its purpose is to keep our community informed, engaged, and confident in the
+      developments shaping our services.
+    </p>
+
+    <p>
+      We are committed to communicating in a way that is open, transparent, and easy to understand.
+      Each edition aims to explain upcoming changes, share useful updates, and signpost practical
+      sources of support that may benefit patients and their families.
+    </p>
+
+    <p>
+      A new issue is released every three months, ensuring that information remains timely and relevant.
+      If you would like to join our mailing list and receive future editions directly, please contact us at
+      <a href="mailto:unsworthppg33@gmail.com">unsworthppg33@gmail.com</a>.
+    </p>
+
+    <p>
+      You can also view our <a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/privacy">Privacy Notice</a>.
+    </p>
+  </main>
+
+  <footer>
+    <p>
+      Copyright &copy; 2025 Unsworth Patient Participation. All rights reserved.
+    </p>
+    <p>
+      <a href="https://jamesduffy154.wixsite.com/unsworthgroupppg/terms">Terms &amp; Conditions</a>
+      <a href="https://db031fb2-d901-4ea0-83f8-bc592b965eb7.filesusr.com/ugd/570e54_cc52cfc037d844b4b9e588b869e43f59.docx?dn=PPG%20website%20access%20document.docx">
+        Accessibility
+      </a>
+    </p>
+    <p><a href="#top">Back to top</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #1f4e79;
+      color: white;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .logout-btn {
+      background: #c00;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .logout-btn:hover {
+      background: #900;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 1.5rem auto;
+      padding: 0 1.25rem 2rem;
+    }
+
+    .notice {
+      background: #fff9db;
+      border: 1px solid #f2d38a;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .controls input {
+      padding: 0.7rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      min-width: 240px;
+      font-size: 0.95rem;
+    }
+
+    .controls button {
+      border: none;
+      background: #1f4e79;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .controls button:hover {
+      background: #153451;
+    }
+
+    .notice.small {
+      background: #eef2ff;
+      border-color: #c7d2fe;
+      margin-top: 1rem;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .summary-item {
+      background: white;
+      border: 1px solid #dbe2ea;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .summary-item h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #dbe2ea;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #eef2ff;
+      color: #1a365d;
+      font-weight: 700;
+    }
+
+    td button {
+      border: 1px solid #d1d5db;
+      background: #f8fafc;
+      color: #1f2937;
+      padding: 0.45rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    td button:hover {
+      background: #e2e8f0;
+    }
+
+    .empty-state {
+      padding: 2rem;
+      text-align: center;
+      color: #475569;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .small-note {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Admin Dashboard</h1>
+    <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
+  </header>
+
+  <main>
+    <div class="notice">
+      <strong>Important:</strong> A plain HTML page cannot automatically capture the IP addresses of other visitors by itself.
+      To make this dashboard work, your website must record visitor IPs on the server and expose them through a log file or backend API.
+    </div>
+
+    <div class="controls">
+      <input id="filterInput" type="text" placeholder="Filter by IP, page, or status" />
+      <button id="clearFilter">Clear filter</button>
+      <button id="loadSampleButton">Load sample data</button>
+      <button id="refreshButton">Refresh IP list</button>
+      <div class="small-note">Expected endpoint: <code>ip-logs.json</code> or a server API returning JSON records.</div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-item">
+        <h2>Total logged IPs</h2>
+        <div id="totalIps">0</div>
+      </div>
+      <div class="summary-item">
+        <h2>Banned IPs</h2>
+        <div id="bannedCount">0</div>
+      </div>
+      <div class="summary-item">
+        <h2>Last updated</h2>
+        <div id="lastUpdated">Never</div>
+      </div>
+      <div class="summary-item">
+        <h2>Current admin IP</h2>
+        <div id="adminIp">Loading...</div>
+      </div>
+    </div>
+
+    <div class="notice small">
+      Sample JSON format:
+      <pre style="margin: 0; padding: 0.75rem; background: #f8fafc; border-radius: 6px; overflow-x:auto; font-size:0.92rem;">[
+  {
+    "ip": "203.0.113.12",
+    "firstSeen": "2026-04-25 15:00",
+    "lastSeen": "2026-04-25 15:22",
+    "page": "/contact"
+  }
+]</pre>
+      <p class="small-note">The “Ban” buttons save a local blocked IP list in your browser. Server-side blocking must still be implemented to actually prevent access.</p>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>IP Address</th>
+            <th>First seen</th>
+            <th>Last seen</th>
+            <th>Page</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="logTableBody">
+          <tr class="empty-state"><td colspan="6">No IP log data loaded yet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="small-note">
+      Tip: use a server-side script or web host logs to capture visitor IPs, then write them to <code>ip-logs.json</code> or another API endpoint.
+      This page can display those results for review.
+    </p>
+  </main>
+
+  <script>
+    // Check admin session
+    if (!localStorage.getItem('adminLoggedIn')) {
+      window.location.href = 'unsworth-ppg-homepage.html';
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem('adminLoggedIn');
+      window.location.href = 'unsworth-ppg-homepage.html';
+    }
+
+    const refreshButton = document.getElementById('refreshButton');
+    const loadSampleButton = document.getElementById('loadSampleButton');
+    const clearFilterButton = document.getElementById('clearFilter');
+    const filterInput = document.getElementById('filterInput');
+    const totalIps = document.getElementById('totalIps');
+    const bannedCount = document.getElementById('bannedCount');
+    const lastUpdated = document.getElementById('lastUpdated');
+    const adminIp = document.getElementById('adminIp');
+    const logTableBody = document.getElementById('logTableBody');
+
+    const banListKey = 'adminBannedIps';
+    const banList = new Set(JSON.parse(localStorage.getItem(banListKey) || '[]'));
+
+    function saveBanList() {
+      localStorage.setItem(banListKey, JSON.stringify([...banList]));
+      bannedCount.textContent = banList.size;
+    }
+
+    function createActionButton(ip) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = banList.has(ip) ? 'Unban' : 'Ban';
+      button.addEventListener('click', () => {
+        if (!ip) return;
+        if (banList.has(ip)) {
+          banList.delete(ip);
+        } else {
+          banList.add(ip);
+        }
+        saveBanList();
+        loadLogs();
+      });
+      return button;
+    }
+
+    async function loadAdminIp() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        adminIp.textContent = data.ip || 'Unknown';
+      } catch (error) {
+        adminIp.textContent = 'Unable to load admin IP';
+      }
+    }
+
+    function matchesFilter(entry, term) {
+      if (!term) return true;
+      const lower = term.toLowerCase();
+      return [entry.ip, entry.page, entry.status, entry.firstSeen, entry.lastSeen]
+        .filter(Boolean)
+        .some(value => value.toLowerCase().includes(lower));
+    }
+
+    function renderLogs(logs) {
+      const filterTerm = filterInput.value.trim();
+      const visible = logs.filter(entry => matchesFilter(entry, filterTerm));
+
+      if (visible.length === 0) {
+        logTableBody.innerHTML = '<tr class="empty-state"><td colspan="6">No matching log entries found.</td></tr>';
+        return;
+      }
+
+      logTableBody.innerHTML = '';
+      visible.forEach(entry => {
+        const row = document.createElement('tr');
+        const ip = entry.ip || '-';
+        const status = banList.has(ip) ? 'Banned' : 'Active';
+
+        row.innerHTML = `
+          <td>${ip}</td>
+          <td>${entry.firstSeen || '-'}</td>
+          <td>${entry.lastSeen || '-'}</td>
+          <td>${entry.page || '-'}</td>
+          <td>${status}</td>
+          <td></td>
+        `;
+
+        const actionCell = row.querySelector('td:last-child');
+        actionCell.appendChild(createActionButton(ip));
+        logTableBody.appendChild(row);
+      });
+    }
+
+    async function loadLogs() {
+      try {
+        const response = await fetch('ip-logs.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(`Status ${response.status}`);
+        }
+
+        const logs = await response.json();
+        if (!Array.isArray(logs) || logs.length === 0) {
+          logTableBody.innerHTML = '<tr class="empty-state"><td colspan="6">No log entries found in ip-logs.json.</td></tr>';
+          totalIps.textContent = '0';
+          lastUpdated.textContent = new Date().toLocaleString();
+          bannedCount.textContent = banList.size;
+          return;
+        }
+
+        totalIps.textContent = logs.length;
+        lastUpdated.textContent = new Date().toLocaleString();
+        bannedCount.textContent = banList.size;
+
+        const mappedLogs = logs.map(entry => ({
+          ip: entry.ip || '',
+          firstSeen: entry.firstSeen || '',
+          lastSeen: entry.lastSeen || '',
+          page: entry.page || '',
+          status: banList.has(entry.ip || '') ? 'Banned' : 'Active'
+        }));
+
+        renderLogs(mappedLogs);
+      } catch (error) {
+        logTableBody.innerHTML = `<tr class="empty-state"><td colspan="6" class="error">Unable to load ip-logs.json. ${error.message}</td></tr>`;
+        totalIps.textContent = '0';
+        lastUpdated.textContent = new Date().toLocaleString();
+        bannedCount.textContent = banList.size;
+      }
+    }
+
+    function loadSampleData() {
+      const sampleLogs = [
+        { ip: '203.0.113.12', firstSeen: '2026-04-25 15:00', lastSeen: '2026-04-25 15:22', page: '/contact' },
+        { ip: '198.51.100.44', firstSeen: '2026-04-25 14:35', lastSeen: '2026-04-25 14:58', page: '/home' },
+        { ip: '192.0.2.136', firstSeen: '2026-04-25 13:12', lastSeen: '2026-04-25 13:30', page: '/admin' }
+      ];
+      totalIps.textContent = sampleLogs.length;
+      lastUpdated.textContent = new Date().toLocaleString();
+      bannedCount.textContent = banList.size;
+      renderLogs(sampleLogs.map(entry => ({
+        ...entry,
+        status: banList.has(entry.ip) ? 'Banned' : 'Active'
+      })));
+    }
+
+    refreshButton.addEventListener('click', loadLogs);
+    loadSampleButton.addEventListener('click', loadSampleData);
+    clearFilterButton.addEventListener('click', () => {
+      filterInput.value = '';
+      loadLogs();
+    });
+    filterInput.addEventListener('input', loadLogs);
+
+    saveBanList();
+    loadAdminIp();
+    loadLogs();
+  </script>
+</body>
+</html>

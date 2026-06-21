@@ -1,0 +1,68 @@
+<div class="banner">
+  <!-- Image 1 -->
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXHuskBQEUVqbEBK0vfI5LCcxVbrChs7xKA&s" class="slide active" alt="Slide 1">
+
+  <!-- Image 2 -->
+  <img src="https://assets.nhs.uk/campaigns-cms-prod/images/circle-HAY-Score-Explained.width-510.png" class="slide" alt="Slide 2">
+
+  <!-- Image 3 -->
+  <img src="https://warwickhouse.org.uk/wp-content/uploads/sites/14/NHS-App.jpg" class="slide" alt="Slide 3">
+
+  <!-- WalkSafe linked slide -->
+  <a href="https://walksafe.io/walksafe/" target="_blank" rel="noopener noreferrer">
+    <img src="https://drive.google.com/uc?export=view&id=1DaBQ0j3kL_APwoz1ysT2NCNw3k_1FgGT" class="slide" alt="WalkSafe">
+  </a>
+</div>
+
+<style>
+  .banner {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .banner img.slide {
+    display: none;
+    width: 100%;
+    height: auto;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .banner img.slide.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.banner .slide');
+  const totalSlides = slides.length;
+
+  function showSlide(n) {
+    // Remove active class from all slides
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    // Add active class to current slide
+    slides[n].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  // Rotate image every 5 seconds
+  setInterval(nextSlide, 5000);
+</script>
